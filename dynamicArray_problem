@@ -1,48 +1,28 @@
-
-import math
-import os
-import random
-import re
-import sys
-
-# Complete the dynamicArray function below.
-def dynamicArray(n, queries):
-    lastNumber = 0
-    seqList=[];
-    for i in range(n):
+def dynamicArray(N,queries):
+    lastAns = 0
+    seqList = []
+    result = []
+    for i in range(N):
         seqList.append([])
-    res = [];
-    for k, x, y in queries:
-        index = (x^lastNumber)%n
-        if k==1:
-            seqList[index].append(y)
-            print(seqList)
+    for i in range(len(queries)):
+        queryType ,x,y = [int(e) for e in queries[i]]
+
+        rowIndex = (x^lastAns)%N
+
+        if(queryType == 1):
+            seqList[rowIndex].append(y)
         else:
-            size = len(seqList[index])
-            print(seqList)
-            print(size)
-            lastNumber = seqList[index][y%size]
-            print(lastNumber)
-            res.append(lastNumber)
-            
-    return res 
+            elemIndex = (y % len(seqList[rowIndex]))
+            lastAns = seqList[rowIndex][elemIndex]
+            print(lastAns)
+            result.append(lastAns)
+    return result
 
-if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+(N,Q) =map(int,input().rstrip().rsplit())
 
-    nq = input().rstrip().split()
 
-    n = int(nq[0])
+queries = []
+for _ in range(Q):
+    queries.append(list(map(int,input().rstrip().split())))
 
-    q = int(nq[1])
-
-    queries = []
-
-    for _ in range(q):
-        queries.append(list(map(int, input().rstrip().split())))
-
-    result = dynamicArray(n, queries)
-    fptr.write('\n'.join(map(str, result)))
-    fptr.write('\n')
-
-    fptr.close()
+result = dynamicArray(N,queries)
