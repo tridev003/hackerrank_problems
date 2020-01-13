@@ -1,0 +1,26 @@
+#1-way
+(n,d) = map(int,input().rstrip().split())
+arr =[]
+arr = [int(n) for n in input().rstrip().split() ]
+
+for i in range(d):
+    temp = arr[0]
+    for j in range(n-1):
+        arr[j] = arr[j + 1]
+    arr[n-1]=temp
+
+#for i in arr:
+        #print(i,end=" ")
+print(" ".join(map(str,arr)))
+
+
+'''
+#2-way
+
+(n,d) = map(int,input().rstrip().split())
+arr =[]
+arr = [int(x) for x  in input().rstrip().split() ]
+arr= arr[d:] + arr[:d]
+print(" ".join(map(str,arr)))
+
+'''
